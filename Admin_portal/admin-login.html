@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login | College Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/admin-login.css">
+</head>
+<body>
+
+<div class="admin-wrapper">
+
+  <!-- LEFT PANEL -->
+  <div class="admin-left">
+    <div class="left-content">
+      <div class="icon-box">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h1>Admin Portal</h1>
+      <p>Secure access for authorized administrators only.</p>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="admin-right">
+    <div class="login-card">
+      <h2>Admin Login</h2>
+      <p class="subtitle">Sign in to manage requests.</p>
+
+      <!-- ✅ FIXED FORM -->
+      <form onsubmit="adminLogin(event)">
+
+        <div class="input-group">
+          <label>Admin ID</label>
+          <div class="input-box">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="adminId" placeholder="Enter Admin ID" required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input-box">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="adminPassword" placeholder="Enter Password" required>
+            <span class="show" onclick="togglePassword()">Show</span>
+          </div>
+        </div>
+
+        <a href="#" class="forgot">Forgot Password?</a>
+
+        <button type="submit" class="login-btn">Login</button>
+
+        <p class="note">For authorized personnel only.</p>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 College Admin Portal. All rights reserved.<br>
+  <span class="dev">Developed by Abhishek Kumar</span>
+</footer>
+
+<!-- js -->
+ <!-- <script src="./js/auth.js"></script> -->
+<script src="./js/admin-login.js"></script>
+</body>
+</html>

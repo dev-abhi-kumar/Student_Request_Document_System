@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile | Student Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/dashboard.css">
+  <link rel="stylesheet" href="./assets/css/profile.css">
+</head>
+<body>
+
+<div class="dashboard-layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">Student Panel</h2>
+
+    <ul class="menu">
+      <li>
+        <a href="dashboard.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="request.html">
+          <i class="fa-solid fa-file-circle-plus"></i>
+          <span>Request Document</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="check-status.html">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Check Status</span>
+        </a>
+      </li>
+
+      <li class="active">
+        <a href="profile.html">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+
+      <li class="logout">
+        <a href="#" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="main-content">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <i class="fa-solid fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+      <h3>My Profile</h3>
+    </div>
+
+    <!-- PROFILE CONTENT -->
+    <div class="profile-page">
+
+      <div class="profile-card">
+        <h2>Profile Details</h2>
+        <p class="subtitle">View and update your personal information</p>
+
+        <form id="profileForm">
+          <div class="grid">
+
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text" id="name">
+            </div>
+
+            <div class="field">
+              <label>Father's Name</label>
+              <input type="text" id="fatherName">
+            </div>
+
+            <div class="field">
+              <label>Mother's Name</label>
+              <input type="text" id="motherName">
+            </div>
+
+            <div class="field">
+              <label>Enrollment Number</label>
+              <input type="text" id="enrollment" disabled>
+            </div>
+
+            <div class="field">
+              <label>Mobile Number</label>
+              <input type="text" id="mobile">
+            </div>
+
+            <div class="field">
+              <label>Email ID</label>
+              <input type="email" id="email">
+            </div>
+
+            <div class="field">
+              <label>Course</label>
+              <input type="text" id="course" disabled>
+            </div>
+
+            <div class="field">
+              <label>Branch</label>
+              <input type="text" id="branch" disabled>
+            </div>
+
+            <div class="field">
+              <label>Semester</label>
+              <input type="text" id="semester" disabled>
+            </div>
+
+          </div>
+
+          <button type="submit" class="update-btn">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Update Profile
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+  // ===== AUTH CHECK =====
+  const loggedUser = localStorage.getItem("loggedInUser");
+  if (!loggedUser) {
+    window.location.href = "login.html";
+  }
+
+  let student = JSON.parse(loggedUser);
+
+  // ===== AUTO FILL =====
+  document.getElementById("name").value = student.name;
+  document.getElementById("fatherName").value = student.fatherName;
+  document.getElementById("motherName").value = student.motherName;
+  document.getElementById("enrollment").value = student.enrollment;
+  document.getElementById("mobile").value = student.mobile;
+  document.getElementById("email").value = student.email;
+  document.getElementById("course").value = student.course;
+  document.getElementById("branch").value = student.branch;
+  document.getElementById("semester").value = student.semester;
+
+  // ===== UPDATE PROFILE (SYNC WITH STUDENTS ARRAY) =====
+  document.getElementById("profileForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Update student object
+    student.name = document.getElementById("name").value;
+    student.fatherName = document.getElementById("fatherName").value;
+    student.motherName = document.getElementById("motherName").value;
+    student.mobile = document.getElementById("mobile").value;
+    student.email = document.getElementById("email").value;
+
+    // Get all students
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    // Find and update logged-in student in array
+    const index = students.findIndex(
+      s => s.enrollment === student.enrollment
+    );
+
+    if (index !== -1) {
+      students[index] = student;
+    }
+
+    // Save back to storage
+    localStorage.setItem("students", JSON.stringify(students));
+    localStorage.setItem("loggedInUser", JSON.stringify(student));
+
+    alert("Profile updated successfully!");
+  });
+
+  // ===== SIDEBAR =====
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("show");
+  }
+
+  // ===== LOGOUT =====
+  function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

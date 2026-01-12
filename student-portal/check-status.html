@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Check Status | Student Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/dashboard.css">
+  <link rel="stylesheet" href="./assets/css/check-status.css">
+</head>
+<body>
+
+<div class="dashboard-layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">Student Panel</h2>
+
+    <ul class="menu">
+      <li>
+        <a href="dashboard.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="request.html">
+          <i class="fa-solid fa-file-circle-plus"></i>
+          <span>Request Document</span>
+        </a>
+      </li>
+
+      <li class="active">
+        <a href="check-status.html">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Check Status</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="profile.html">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+
+      <li class="logout">
+        <a href="#" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="main-content">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <i class="fa-solid fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+      <h3>Check Status</h3>
+    </div>
+
+    <!-- STATUS PAGE CONTENT -->
+    <div class="status-page">
+
+      <!-- LEFT IMAGE -->
+      <div class="status-image">
+        <img src="./assets/images/check-status.png" alt="Check Status Illustration">
+      </div>
+
+      <!-- RIGHT CARD -->
+      <div class="status-card">
+        <h2>Check Status</h2>
+        <p class="subtitle">
+          Enter your Reference ID or Enrollment Number to check request status.
+        </p>
+
+        <div class="status-input">
+          <span class="icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Reference / Enrollment Number">
+        </div>
+
+        <button class="status-btn" onclick="checkStatus()">Check Status</button>
+
+        <!-- RESULT -->
+        <div class="status-result" id="statusResult" style="display:none;">
+          <h4>Status Overview</h4>
+
+          <div class="status-box">
+            <span>Request ID:</span> <span id="reqId"></span>
+          </div>
+
+          <div class="status-box">
+            <span>Document:</span> <span id="docType"></span>
+          </div>
+
+          <div class="status-box">
+            <span>Status:</span> <span id="reqStatus"></span>
+          </div>
+
+          <div class="status-box">
+            <span>Date:</span> <span id="reqDate"></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!----js-->
+<script>
+  // ===== AUTH CHECK =====
+  const loggedUser = localStorage.getItem("loggedInUser");
+  if (!loggedUser) {
+    window.location.href = "login.html";
+  }
+
+  const student = JSON.parse(loggedUser);
+
+  // ===== SIDEBAR TOGGLE =====
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("show");
+  }
+
+  // ===== LOGOUT =====
+  function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+  }
+
+  // ===== CHECK STATUS LOGIC (MULTIPLE REQUESTS) =====
+  function checkStatus() {
+    const input = document.getElementById("searchInput").value.trim();
+    const resultBox = document.getElementById("statusResult");
+
+    if (input === "") {
+      alert("Please enter Reference Number or Enrollment Number");
+      return;
+    }
+
+    // Get all requests
+    const requests = JSON.parse(localStorage.getItem("requests")) || [];
+
+    if (requests.length === 0) {
+      alert("No requests found.");
+      return;
+    }
+
+    // Find matching request (by reference OR enrollment)
+    const request = requests.find(
+      r =>
+        r.reference === input ||
+        (r.enrollment === input && r.enrollment === student.enrollment)
+    );
+
+    if (!request) {
+      alert("No matching request found.");
+      resultBox.style.display = "none";
+      return;
+    }
+
+    // Show result
+    document.getElementById("reqId").textContent = request.reference;
+    document.getElementById("docType").textContent = request.document;
+    document.getElementById("reqStatus").textContent = request.status;
+    document.getElementById("reqDate").textContent = request.date;
+
+    resultBox.style.display = "block";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ================= PAGE HEADER ================= */
+.page-header {
+  margin-bottom: 25px;
+}
+
+.page-header h2 {
+  color: #1e3a8a;
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.page-header p {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* ================= LAYOUT ================= */
+.request-container {
+  display: flex;
+  gap: 35px;
+  align-items: flex-start;
+}
+
+/* ================= FORM CARD ================= */
+.request-card {
+  flex: 1.2;
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.field textarea {
+  resize: none;
+  height: 90px;
+}
+
+.field input:disabled {
+  background: #f1f5f9;
+}
+
+/* ================= SUPPORTING DOCUMENT UPLOAD ================= */
+.upload-group {
+  display: flex;
+  gap: 14px;
+}
+
+.upload-box {
+  flex: 1;
+}
+
+.upload-box label {
+  font-size: 13px;
+  color: #334155;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.upload-box input[type="file"] {
+  width: 100%;
+  padding: 9px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  font-size: 13px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.upload-box input[type="file"]:hover {
+  border-color: #2563eb;
+}
+
+/* ================= BUTTON ================= */
+.submit-btn {
+  width: 220px;
+  margin-top: 15px;
+  padding: 12px;
+  background: linear-gradient(to right, #2563eb, #1e40af);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ================= INFO CARD ================= */
+.request-info {
+  flex: 1;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.request-info img {
+  max-width: 320px;
+  margin-bottom: 14px;
+}
+
+.request-info p {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .request-container {
+    flex-direction: column;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .upload-group {
+    flex-direction: column;
+  }
+}

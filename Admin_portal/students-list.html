@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Students List | Admin Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/students-list.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">🛡️ Admin Portal</h2>
+
+    <ul class="menu">
+      <li><a href="admin-dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+      <li><a href="student-requests.html"><i class="fa-solid fa-file-lines"></i> Student Requests</a></li>
+      <li><a href="pending-requests.html"><i class="fa-solid fa-clock"></i> Pending Requests</a></li>
+      <li><a href="approved-requests.html"><i class="fa-solid fa-circle-check"></i> Approved Requests</a></li>
+      <li><a href="rejected-requests.html"><i class="fa-solid fa-circle-xmark"></i> Rejected Requests</a></li>
+      <li class="active"><a href="students-list.html"><i class="fa-solid fa-users"></i> Students List</a></li>
+      <li><a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports</a></li>
+      <li><a href="admin-profile.html"><i class="fa-solid fa-user"></i> Admin Profile</a></li>
+
+      <!-- ✅ LOGOUT FIXED -->
+      <li class="logout">
+        <a href="#" onclick="adminLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <i class="fa-solid fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+      <h2>Students List</h2>
+
+      <div class="top-right">
+        <input type="text" placeholder="Search student...">
+        <i class="fa-solid fa-bell"></i>
+        <span>Admin</span>
+      </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card">
+      <h3>Registered Students</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Enrollment No.</th>
+              <th>Course</th>
+              <th>Total Requests</th>
+            </tr>
+          </thead>
+
+          <!-- ✅ IMPORTANT: EMPTY TBODY FOR JS -->
+          <tbody id="studentsTableBody">
+            <!-- JS will inject rows here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      © 2026 College Admin Portal<br>
+      Developed by <strong>Abhishek Kumar</strong>
+    </footer>
+
+  </main>
+</div>
+
+<!-- JS -->
+ <script src="./js/student-list.js"></script>
+
+</body>
+</html>

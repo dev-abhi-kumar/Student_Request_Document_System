@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/admin-dashboard.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <h2 class="logo">🛡️ Admin Portal</h2>
+
+    <ul class="menu">
+      <li class="active">
+        <a href="admin-dashboard.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="student-requests.html">
+          <i class="fa-solid fa-file-lines"></i>
+          <span>Student Requests</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="pending-requests.html">
+          <i class="fa-solid fa-clock"></i>
+          <span>Pending Requests</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="approved-requests.html">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Approved Requests</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="rejected-requests.html">
+          <i class="fa-solid fa-circle-xmark"></i>
+          <span>Rejected Requests</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="students-list.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Students List</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Reports</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="admin-profile.html">
+          <i class="fa-solid fa-user"></i>
+          <span>Admin Profile</span>
+        </a>
+      </li>
+
+      <li class="logout">
+        <a href="#" onclick="adminLogout()">
+
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="main-content">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <i class="fa-solid fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+
+      <h2>Admin Dashboard</h2>
+
+      <div class="top-actions">
+        <input type="text" placeholder="Search...">
+        <i class="fa-solid fa-bell"></i>
+        <span class="admin-name">Admin</span>
+      </div>
+    </div>
+
+    <!-- ================= STATS ================= -->
+    <div class="stats">
+      <div class="stat blue">
+        <h4>Total Requests</h4>
+        <p id="totalRequests">0</p>
+      </div>
+
+      <div class="stat orange">
+        <h4>Pending</h4>
+        <p id="pendingRequests">0</p>
+      </div>
+
+      <div class="stat green">
+        <h4>Approved</h4>
+        <p id="approvedRequests">0</p>
+      </div>
+
+      <div class="stat red">
+        <h4>Rejected</h4>
+        <p id="rejectedRequests">0</p>
+      </div>
+    </div>
+
+    <!-- ================= RECENT REQUESTS ================= -->
+    <div class="card">
+      <h3>Recent Requests</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Reference ID</th>
+              <th>Student Name</th>
+              <th>Enrollment</th>
+              <th>Document</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="recentRequestsBody">
+            <!-- JS will inject rows here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      © 2026 College Admin Portal<br>
+      Developed by <strong>Abhishek Kumar</strong>
+    </footer>
+
+  </main>
+</div>
+
+<!-- ================= JS ================= -->
+ <!-- <script src="./js/auth.js"></script> -->
+ <script src="./js/admin-dashboard.js"></script>
+</body>
+</html>

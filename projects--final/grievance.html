@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grievance | Student Document Request System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Remix icon Cdn -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #F5F7FB;
+    }
+
+    /* ================= GRIEVANCE SECTION ================= */
+    .grievance-section {
+      padding: 70px 20px;
+    }
+
+    .grievance-wrapper {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .grievance-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .grievance-title h2 {
+      font-size: 32px;
+      color: #1E3A8A;
+      margin-bottom: 6px;
+      font-weight: 900;
+    }
+
+    .grievance-box {
+      background: #FFFFFF;
+      border-radius: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+      padding: 35px;
+    }
+
+    .grievance-box h3 {
+      text-align: center;
+      font-size: 20px;
+      color: #1E40AF;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      color: #334155;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .form-group textarea {
+      resize: none;
+      height: 90px;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    /* CAPTCHA */
+    .captcha-box {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .captcha-question {
+      background: #EFF6FF;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #1E40AF;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .refresh-btn {
+        background: #EFF6FF;
+        border: 1px solid #CBD5E1;
+        border-radius: 8px;
+        padding: 10px 12px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #1E40AF;
+    }
+
+    .refresh-btn:hover {
+        background: #DBEAFE;
+    }
+
+
+    /* Submit */
+    .submit-btn {
+      margin-top: 25px;
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(to right, #2563EB, #1E40AF);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= Navbar SECTION ================= -->
+<header class="sdrs-header">
+  <div class="nav-wrapper">
+
+    <!-- Logo -->
+    <a  class="logo-link" href="index.html">
+    <div class="logo-box">
+      <img src="assets/logo.png" alt="SDRS Logo">
+      <div class="logo-text">
+        <h1>Student Document</h1>
+        <span>Request System</span>
+      </div>
+    </div>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="grievance.html">Grievance</a>
+      <a href="contact.html">Contact Us</a>
+
+      <!-- Login Dropdown -->
+      <div class="login-dropdown">
+        <button id="loginBtn" class="login-btn">
+          Login ▾
+        </button>
+
+        <div class="login-menu" id="loginMenu">
+          <a href="../student-portal/login.html" target="_blank">User Login</a>
+          <a href="#">Admin Login</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Icon -->
+    <div class="menu-icon" id="menuIcon">☰</div>
+  </div>
+</header>
+
+
+<!-- ================= GRIEVANCE ================= -->
+<section class="grievance-section">
+  <div class="grievance-wrapper">
+
+    <div class="grievance-title">
+      <h2>Grievance</h2>
+    </div>
+
+    <div class="grievance-box">
+      <h3>Lodge Grievance / Complaint</h3>
+
+      <form onsubmit="return validateCaptcha()">
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Enter Your Name" required>
+          </div>
+
+          <div class="form-group">
+            <label>Gender</label>
+            <select required>
+              <option value="">Select Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="Enter Your Email" required>
+          </div>
+
+          <div class="form-group">
+            <label>Mobile</label>
+            <input type="tel" placeholder="Enter Your Mobile" required maxlength="10">
+          </div>
+
+          <div class="form-group">
+            <label>Branch</label>
+            <select required>
+              <option value="">Select Branch</option>
+              <option>CSE</option>
+              <option>IT</option>
+              <option>ECE</option>
+              <option>ME</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Roll No</label>
+            <input type="text" placeholder="Enter Your Roll Number" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Description</label>
+            <textarea placeholder="Enter Your Comments" required></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label>Attachment (optional)</label>
+            <input type="file">
+          </div>
+
+          <div class="form-group full-width">
+            <label>CAPTCHA</label>
+            <div class="captcha-box">
+                <div class="captcha-question" id="captchaText"></div>
+
+                    <input type="number" id="captchaInput" placeholder="Enter answer" required>
+
+                    <button type="button" class="refresh-btn" onclick="generateCaptcha()">
+                    ↻
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="submit-btn">Submit Grievance</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= FOOTER SECTION ================= -->
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Logo & About -->
+    <div class="footer-box">
+      <a href="index.html">
+      <div class="footer-logo">
+        <img src="./assets/logo.png" alt="SDRS Logo">
+        <h3>Student Document<br><span id="SDRS">Request System</span></h3>
+      </div>
+      </a>
+
+      <p>
+        A web-based platform for students to request, manage, and track
+        their academic documents efficiently.
+      </p>
+
+     <div class="footer-social">
+  <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+    <i class="ri-facebook-fill"></i>
+  </a>
+
+  <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+    <i class="ri-instagram-line"></i>
+  </a>
+
+  <a href="https://twitter.com/" target="_blank" aria-label="Twitter">
+    <i class="ri-twitter-x-line"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn">
+    <i class="ri-linkedin-fill"></i>
+  </a>
+</div>
+
+
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-box">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="../student-portal/login.html" target="_blank">Request Document</a></li>
+        <li><a href="../student-portal/login.html" target="_blank">Check Status</a></li>
+        <li><a href="index.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-box">
+      <h4>Contact Info</h4>
+      <p><i class="ri-map-pin-line"></i> 123 College Ave, City, State 12345</p>
+      <p><i class="ri-mail-line"></i> info@example.com</p>
+      <p><i class="ri-phone-line"></i> +1 234 567 8900</p>
+    </div>
+
+
+    <!-- Subscribe -->
+    <div class="footer-box">
+      <h4>Subscribe to Updates</h4>
+      <p>Enter your email address to receive updates.</p>
+
+      <div class="subscribe-box">
+        <input type="email" placeholder="Your email address">
+        <button>Subscribe</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <p>
+      © 2025 Student Document Request System | All Rights Reserved  
+      <br>
+      Developed by <strong>Abhishek Kumar</strong>
+    </p>
+  </div>
+
+
+  <!-- Back to Top Button -->
+<button id="backToTop" aria-label="Back to Top">
+  <i class="ri-arrow-up-line"></i>
+</button>
+
+</footer>
+
+
+
+
+<script>
+  let a, b;
+
+  function generateCaptcha() {
+    a = Math.floor(Math.random() * 10) + 1;
+    b = Math.floor(Math.random() * 10) + 1;
+    document.getElementById("captchaText").innerText =
+      a + " + " + b + " = ?";
+    document.getElementById("captchaInput").value = "";
+  }
+
+  // Simple Reference Number Generator
+  function generateReferenceNumber() {
+    const randomNum = Math.floor(100000 + Math.random() * 900000);
+    return "REF-" + randomNum;
+  }
+
+  // Page load
+  window.onload = generateCaptcha;
+
+  function validateCaptcha() {
+    const userAns = document.getElementById("captchaInput").value;
+
+    if (parseInt(userAns) !== a + b) {
+      alert("Captcha incorrect! Please try again.");
+      generateCaptcha();
+      return false;
+    }
+
+    const referenceNo = generateReferenceNumber();
+
+    alert(
+      "Form Submitted Successfully!\n\n" +
+      "Your Reference Number is:\n" +
+      referenceNo +
+      "\n\nPlease keep it for future use."
+    );
+
+    generateCaptcha();
+    return false; // backend nahi hai
+  }
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

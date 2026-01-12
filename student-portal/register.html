@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/register.css">
+</head>
+<body>
+
+  <div class="register-page">
+
+    <!-- LEFT IMAGE -->
+    <div class="register-image">
+      <img src="./assets/images/student-register.png" alt="Student Registration">
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="register-card">
+      <h2>Student Registration</h2>
+      <p class="subtitle">Create your account by filling out the form below.</p>
+
+        <form id="registerForm">
+            <div class="grid">
+
+              <div class="field">
+                <label>Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+              </div>
+
+              <div class="field">
+                <label>Father’s Name</label>
+                <input type="text" id="fatherName" placeholder="Father's name" required>
+              </div>
+
+              <div class="field">
+                <label>Mother’s Name</label>
+                <input type="text" id="motherName" placeholder="Mother's name" required>
+              </div>
+
+              <div class="field">
+                <label>Course</label>
+                <select id="course" required>
+                  <option value="">Select Course</option>
+                  <option>B.Sc</option>
+                  <option>BCA</option>
+                  <option>B.Tech</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Branch</label>
+                <select id="branch" required>
+                  <option value="">Select Branch</option>
+                  <option>Computer / Computer Science</option>
+                  <option>Information Technology</option>
+                  <option>Mechanical</option>
+                  <option>Civil</option>
+                  <option>Electrical</option>
+                  <option>Electronics</option>
+                  <option>Data Science</option>
+                  <option>Artificial Intelligence</option>
+                  <option>Any Other Branch</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Semester</label>
+                <select id="semester" required>
+                  <option value="">Select Semester</option>
+                  <option>1st Semester</option>
+                  <option>2nd Semester</option>
+                  <option>3rd Semester</option>
+                  <option>4th Semester</option>
+                  <option>5th Semester</option>
+                  <option>6th Semester</option>
+                  <option>7th Semester</option>
+                  <option>8th Semester</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Year</label>
+                <select id="year" required>
+                  <option value="">Select Year</option>
+                  <option>1st Year</option>
+                  <option>2nd Year</option>
+                  <option>3rd Year</option>
+                  <option>4th Year</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Enrollment Number</label>
+                <input type="text" id="enrollment" placeholder="Enter enrollment number" required>
+              </div>
+
+              <div class="field">
+                <label>Roll Number</label>
+                <input type="text" id="roll" placeholder="Enter roll number" required>
+              </div>
+
+              <div class="field">
+                <label>Mobile Number</label>
+                <input type="text" id="mobile" placeholder="Enter mobile number" required>
+              </div>
+
+              <div class="field">
+                <label>Email ID</label>
+                <input type="email" id="email" placeholder="Enter email id" required>
+              </div>
+
+              <div class="field">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Password" required>
+              </div>
+
+              <div class="field">
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+              </div>
+
+            </div>
+
+            <button type="submit" class="register-btn">Register</button>
+
+            <p class="login-link">
+              Already have an account?
+              <a href="login.html">Login</a>
+            </p>
+
+        </form>
+
+
+    </div>
+
+  </div>
+
+  <!-- JS -->
+  <script src="./assets/javascript/register.js"></script>
+
+</body>
+</html>

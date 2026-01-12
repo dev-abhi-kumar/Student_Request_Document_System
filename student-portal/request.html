@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Request Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/dashboard.css">
+  <link rel="stylesheet" href="./assets/css/request.css">
+</head>
+<body>
+
+<div class="dashboard-layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">Student Panel</h2>
+
+    <ul class="menu">
+      <li>
+        <a href="dashboard.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li class="active">
+        <a href="request.html">
+          <i class="fa-solid fa-file-circle-plus"></i>
+          <span>Request Document</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="check-status.html">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Check Status</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="profile.html">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+
+      <li class="logout">
+        <a href="#" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="main-content">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <i class="fa-solid fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+      <h3>Request Document</h3>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <header class="page-header">
+      <p>Submit a request for your academic documents</p>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="request-container">
+
+      <!-- FORM -->
+      <div class="request-card">
+        <form id="requestForm">
+
+          <div class="field">
+            <label>Enrollment Number</label>
+            <input type="text" id="enrollment" disabled>
+          </div>
+
+          <div class="field">
+            <label>Document Type</label>
+            <select id="documentType" required>
+              <option value="">Select Document</option>
+              <option>Bonafide Certificate</option>
+              <option>Transfer Certificate (TC)</option>
+              <option>Migration Certificate</option>
+              <option>Provisional Certificate</option>
+              <option>Marksheet</option>
+              <option>Fee Receipt</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Purpose / Reason</label>
+            <textarea id="purpose" placeholder="Enter purpose of document" required></textarea>
+          </div>
+
+          <div class="field">
+            <label>Upload Supporting Files (Optional)</label>
+
+            <div class="upload-group">
+              <div class="upload-box">
+                <label>ID Card</label>
+                <input type="file">
+              </div>
+
+              <div class="upload-box">
+                <label>Aadhaar Card</label>
+                <input type="file">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fa-solid fa-paper-plane"></i>
+            Submit Request
+          </button>
+
+        </form>
+      </div>
+
+      <!-- INFO -->
+      <div class="request-info">
+        <img src="./assets/images/request-document.png" alt="Request Document">
+        <p>
+          After submitting your request, it will be reviewed by the
+          college administration. You can track the status using
+          the generated reference number.
+        </p>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+  // ===== AUTH CHECK =====
+  const loggedUser = localStorage.getItem("loggedInUser");
+  if (!loggedUser) {
+    window.location.href = "login.html";
+  }
+
+  const student = JSON.parse(loggedUser);
+
+  // Auto-fill enrollment
+  document.getElementById("enrollment").value = student.enrollment;
+
+  // ===== SIDEBAR TOGGLE =====
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("show");
+  }
+
+  // ===== LOGOUT =====
+  function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+  }
+
+  // ===== REQUEST SUBMIT (MULTIPLE REQUESTS) =====
+  document.getElementById("requestForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const documentType = document.getElementById("documentType").value;
+    const purpose = document.getElementById("purpose").value.trim();
+
+    if (documentType === "") {
+      alert("Please select a Document Type.");
+      return;
+    }
+
+    if (purpose === "") {
+      alert("Please enter the purpose / reason for request.");
+      return;
+    }
+
+    const refNo = "REQ-" + Math.floor(100000 + Math.random() * 900000);
+
+    // ✅ FIX APPLIED HERE
+    const requestData = {
+      reference: refNo,
+      enrollment: student.enrollment,
+      studentName: student.name,
+      course: student.course,              // ✅ IMPORTANT LINE
+      document: documentType,
+      purpose: purpose,
+      status: "Pending",
+      date: new Date().toLocaleDateString()
+    };
+
+    let requests = JSON.parse(localStorage.getItem("requests")) || [];
+    requests.push(requestData);
+    localStorage.setItem("requests", JSON.stringify(requests));
+
+    alert(
+      "Request submitted successfully!\n\nReference Number: " + refNo
+    );
+
+    window.location.href = "check-status.html";
+  });
+</script>
+</body>
+</html>

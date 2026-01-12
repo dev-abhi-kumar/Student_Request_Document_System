@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+
+<div class="dashboard-layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">Student Panel</h2>
+
+    <ul class="menu">
+      <li class="active">
+        <a href="dashboard.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="request.html">
+          <i class="fa-solid fa-file-circle-plus"></i>
+          <span>Request Document</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="check-status.html">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Check Status</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="profile.html">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+
+      <li class="logout">
+        <a href="#" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="main-content">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <i class="fa-solid fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+      <h3>Welcome, <span id="studentName">Student</span> 👋</h3>
+    </div>
+
+    <!-- STATS -->
+    <div class="card-grid">
+
+      <div class="card">
+        <i class="fa-solid fa-file"></i>
+        <h4>Total Requests</h4>
+        <p id="totalCount">0</p>
+      </div>
+
+      <div class="card pending">
+        <i class="fa-solid fa-clock"></i>
+        <h4>Pending Requests</h4>
+        <p id="pendingCount">0</p>
+      </div>
+
+      <div class="card approved">
+        <i class="fa-solid fa-circle-check"></i>
+        <h4>Approved Requests</h4>
+        <p id="approvedCount">0</p>
+      </div>
+
+    </div>
+
+    <!-- REQUEST HISTORY -->
+    <div class="history-box">
+      <h4>Request History</h4>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Document Type</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody">
+          <tr>
+            <td>REQ-1001</td>
+            <td>Transcript</td>
+            <td><span class="status approved">Approved</span></td>
+            <td>10 Apr 2024</td>
+          </tr>
+          <tr>
+            <td>REQ-1002</td>
+            <td>Bonafide Certificate</td>
+            <td><span class="status pending">Pending</span></td>
+            <td>08 Apr 2024</td>
+          </tr>
+          <tr>
+            <td>REQ-1003</td>
+            <td>Fee Receipt</td>
+            <td><span class="status rejected">Rejected</span></td>
+            <td>05 Apr 2024</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<!-- JS --> 
+ <script src="./assets/javascript/dashboard.js"></script>
+</body>
+</html>

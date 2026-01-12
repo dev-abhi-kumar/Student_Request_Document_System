@@ -1,0 +1,82 @@
+/* ================= PROFILE PAGE ================= */
+.profile-page {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.profile-card {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+}
+
+.profile-card h2 {
+  font-size: 26px;
+  color: #1e3a8a;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 8px 0 24px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.field label {
+  font-size: 13px;
+  color: #334155;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.field input:disabled {
+  background: #f1f5f9;
+}
+
+/* BUTTON */
+.update-btn {
+  margin: 30px auto 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #2563eb, #1e40af);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.update-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/login.css">
+</head>
+<body>
+
+<div class="login-page">
+
+  <!-- LEFT IMAGE -->
+  <div class="login-image">
+    <img src="./assets/images/student-register.png" alt="Student Login Illustration">
+  </div>
+
+  <!-- LOGIN CARD -->
+  <div class="login-card">
+    <h2>Login to Your Account</h2>
+
+    <form id="loginForm">
+
+      <div class="input-row">
+        <span class="icon-box">
+          <i class="fa-solid fa-user"></i>
+        </span>
+        <input
+          type="text"
+          id="loginEnrollment"
+          placeholder="Enter your Student ID"
+          required
+        >
+      </div>
+
+      <div class="input-row">
+        <span class="icon-box">
+          <i class="fa-solid fa-lock"></i>
+        </span>
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Enter your Password"
+          required
+        >
+      </div>
+
+      <div class="options">
+        <label class="remember">
+          <input type="checkbox">
+          Remember me
+        </label>
+        <a href="#" class="forgot">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+
+      <p class="register-text">
+        Don’t have an account?
+        <a href="register.html">Register</a>
+      </p>
+
+    </form>
+  </div>
+
+</div>
+
+<!-- JS -->
+<script src="./assets/javascript/login.js"></script>
+</body>
+</html>

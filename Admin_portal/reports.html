@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reports | Admin Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <!-- Common Admin CSS -->
+  <link rel="stylesheet" href="./css/students-list.css">
+
+  <style>
+    .report-filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .report-filters select,
+    .report-filters input {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5f5;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .report-summary td {
+      font-weight: 500;
+    }
+
+    @media (max-width: 480px) {
+      .top-right span {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">🛡️ Admin Portal</h2>
+
+    <ul class="menu">
+      <li><a href="admin-dashboard.html"><i class="fa-solid fa-chart-line"></i>Dashboard</a></li>
+      <li><a href="student-requests.html"><i class="fa-solid fa-file-lines"></i>Student Requests</a></li>
+      <li><a href="pending-requests.html"><i class="fa-solid fa-clock"></i>Pending Requests</a></li>
+      <li><a href="approved-requests.html"><i class="fa-solid fa-circle-check"></i>Approved Requests</a></li>
+      <li><a href="rejected-requests.html"><i class="fa-solid fa-circle-xmark"></i>Rejected Requests</a></li>
+      <li><a href="students-list.html"><i class="fa-solid fa-users"></i>Students List</a></li>
+      <li class="active"><a href="reports.html"><i class="fa-solid fa-chart-pie"></i>Reports</a></li>
+      <li><a href="admin-profile.html"><i class="fa-solid fa-user"></i>Admin Profile</a></li>
+      <li class="logout">
+        <a href="#" onclick="adminLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i>Logout
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div>
+        <i class="fa-solid fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+        <h2>Reports</h2>
+      </div>
+
+      <div class="top-right">
+        <input type="text" placeholder="Search report...">
+        <i class="fa-solid fa-bell"></i>
+        <span>Admin</span>
+      </div>
+    </div>
+
+    <!-- ================= GENERATE REPORT ================= -->
+    <div class="card">
+      <h3>Generate Report</h3>
+
+      <div class="report-filters">
+        <select>
+          <option>Select Report Type</option>
+          <option>Total Requests</option>
+          <option>Pending Requests</option>
+          <option>Approved Requests</option>
+          <option>Rejected Requests</option>
+        </select>
+
+        <select>
+          <option>Select Course</option>
+          <option>B.Tech</option>
+          <option>BCA</option>
+          <option>MCA</option>
+        </select>
+
+        <input type="date">
+        <input type="date">
+
+        <button class="view" onclick="generateReport()">Generate</button>
+      </div>
+    </div>
+
+    <!-- ================= REPORT SUMMARY ================= -->
+    <div class="card">
+      <h3>Report Summary</h3>
+
+      <div class="table-wrapper">
+        <table class="report-summary">
+          <thead>
+            <tr>
+              <th>Report Type</th>
+              <th>Total</th>
+              <th>Approved</th>
+              <th>Pending</th>
+              <th>Rejected</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Document Requests</td>
+              <td id="reportTotal">0</td>
+              <td id="reportApproved">0</td>
+              <td id="reportPending">0</td>
+              <td id="reportRejected">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= REPORT DATA ================= -->
+    <div class="card">
+      <h3>Detailed Report</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Reference</th>
+              <th>Student</th>
+              <th>Enrollment</th>
+              <th>Document</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="reportTableBody">
+            <!-- JS inject -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= EXPORT ================= -->
+    <div class="card">
+      <h3>Export Report</h3>
+
+      <div style="display:flex;gap:15px;flex-wrap:wrap;">
+        <button class="view" onclick="downloadPDF()">
+          <i class="fa-solid fa-file-pdf"></i> Download PDF
+        </button>
+
+        <button class="view" onclick="exportExcel()">
+          <i class="fa-solid fa-file-excel"></i> Export Excel
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      © 2026 College Admin Portal <br>
+      Developed by <strong>Abhishek Kumar</strong>
+    </footer>
+
+  </main>
+</div>
+
+<!-- ================= LIBRARIES ================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<!-- ================= JS ================= -->
+ <!-- <script src="./js/auth.js"></script> -->
+<script src="./js/reports.js"></script>
+
+</body>
+</html>
