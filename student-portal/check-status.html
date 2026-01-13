@@ -96,24 +96,30 @@
 
         <!-- RESULT -->
         <div class="status-result" id="statusResult" style="display:none;">
-          <h4>Status Overview</h4>
+            <h4>Status Overview</h4>
 
-          <div class="status-box">
-            <span>Request ID:</span> <span id="reqId"></span>
-          </div>
+            <div class="status-box">
+              <span>Request ID:</span> <span id="reqId"></span>
+            </div>
 
-          <div class="status-box">
-            <span>Document:</span> <span id="docType"></span>
-          </div>
+            <div class="status-box">
+              <span>Document:</span> <span id="docType"></span>
+            </div>
 
-          <div class="status-box">
-            <span>Status:</span> <span id="reqStatus"></span>
-          </div>
+            <div class="status-box">
+              <span>Status:</span> <span id="reqStatus"></span>
+            </div>
 
-          <div class="status-box">
-            <span>Date:</span> <span id="reqDate"></span>
-          </div>
+            <div class="status-box">
+              <span>Date:</span> <span id="reqDate"></span>
+            </div>
+
+            <!-- DOWNLOAD -->
+            <a id="downloadBtn" class="download-btn disabled" href="#" download>
+              <i class="fa-solid fa-download"></i> Download Document
+            </a>
         </div>
+
 
       </div>
 
@@ -122,7 +128,6 @@
   </main>
 </div>
 
-<!----js-->
 <script>
   // ===== AUTH CHECK =====
   const loggedUser = localStorage.getItem("loggedInUser");
@@ -143,17 +148,17 @@
     window.location.href = "login.html";
   }
 
-  // ===== CHECK STATUS LOGIC (MULTIPLE REQUESTS) =====
+  // ===== CHECK STATUS LOGIC (FINAL) =====
   function checkStatus() {
     const input = document.getElementById("searchInput").value.trim();
     const resultBox = document.getElementById("statusResult");
+    const downloadBtn = document.getElementById("downloadBtn");
 
-    if (input === "") {
+    if (!input) {
       alert("Please enter Reference Number or Enrollment Number");
       return;
     }
 
-    // Get all requests
     const requests = JSON.parse(localStorage.getItem("requests")) || [];
 
     if (requests.length === 0) {
@@ -161,7 +166,6 @@
       return;
     }
 
-    // Find matching request (by reference OR enrollment)
     const request = requests.find(
       r =>
         r.reference === input ||
@@ -174,15 +178,27 @@
       return;
     }
 
-    // Show result
+    // ===== SHOW DATA =====
     document.getElementById("reqId").textContent = request.reference;
     document.getElementById("docType").textContent = request.document;
     document.getElementById("reqStatus").textContent = request.status;
     document.getElementById("reqDate").textContent = request.date;
 
+    // ===== DOWNLOAD LOGIC =====
+    if (request.status === "Approved" && request.fileUrl) {
+      downloadBtn.classList.remove("disabled");
+      downloadBtn.href = request.fileUrl;
+      downloadBtn.style.pointerEvents = "auto";
+    } else {
+      downloadBtn.classList.add("disabled");
+      downloadBtn.href = "#";
+      downloadBtn.style.pointerEvents = "none";
+    }
+
     resultBox.style.display = "block";
   }
 </script>
+
 
 </body>
 </html>
